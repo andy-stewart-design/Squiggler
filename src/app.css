@@ -1,0 +1,20 @@
+/* Write your global styles here, in PostCSS syntax */
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer base {
+  :root {
+    @apply antialiased bg-gray-200 text-gray-800 dark:bg-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+}
