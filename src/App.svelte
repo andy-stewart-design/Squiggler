@@ -1,15 +1,13 @@
 <script>
   // @ts-nocheck
 
+  // TODO Toast
   // TODO slider component
   // TODO button components
-  // TODO Radio Component functional/accessibility updates
   // TODO focus styles
   // TODO Typescript
 
-  import RadioGroup from "@components/RadioGroup.svelte";
-  import RadioGroupLabel from "@components/RadioGroupLabel.svelte";
-  import RadioGroupOption from "@components/RadioGroupOption.svelte";
+  import { RadioGroup, RadioGroupLabel, RadioGroupOption } from "neutral-ui";
   import RangeSlider from "@components/RangeSlider.svelte";
 
   let svgContainer;
@@ -88,6 +86,15 @@
     const svg = svgContainer.innerHTML;
     navigator.clipboard.writeText(svg);
   }
+
+  const orientationOptions = [
+    { val: "default", text: "↓" },
+    { val: "flipped", text: "↑" },
+  ];
+  const strokeCapOptions = [
+    { val: "round", text: "●" },
+    { val: "butt", text: "■" },
+  ];
 </script>
 
 <main
@@ -127,16 +134,41 @@
       class="flex flex-col gap-6 font-medium text-sm p-6 bg-gray-100 dark:bg-gray-800 border border-gray-900/10 dark:border-gray-100/5 rounded-2xl shadow-2xl min-w-[300px]"
     >
       <div class="flex gap-3">
-        <RadioGroup bind:value={flip}>
+        <RadioGroup bind:value={flip} class="flex grow">
           <RadioGroupLabel>Squiggle Orientation</RadioGroupLabel>
-          <RadioGroupOption value="default">↓</RadioGroupOption>
-          <RadioGroupOption value="flipped">↑</RadioGroupOption>
+          {#each orientationOptions as option, index}
+            <RadioGroupOption
+              value={option.val}
+              {index}
+              let:checked
+              class="grow bg-gray-200 dark:bg-gray-700 border border-gray-800/10 dark:border-gray-100/10 hover:bg-cyan-300/50 dark:hover:bg-blue-600/50 first-of-type:rounded-l-full last-of-type:rounded-r-full last-of-type:border-l-0 overflow-hidden focus-visible:z-10"
+            >
+              <p
+                class="text-center p-3 transition-colors ease-out"
+                class:checked
+              >
+                {option.text}
+              </p>
+            </RadioGroupOption>
+          {/each}
         </RadioGroup>
-
-        <RadioGroup bind:value={strokeCap}>
+        <RadioGroup bind:value={strokeCap} class="flex grow">
           <RadioGroupLabel>Stroke Cap Style</RadioGroupLabel>
-          <RadioGroupOption value="round">●</RadioGroupOption>
-          <RadioGroupOption value="butt">■</RadioGroupOption>
+          {#each strokeCapOptions as option, index}
+            <RadioGroupOption
+              value={option.val}
+              {index}
+              let:checked
+              class="grow bg-gray-200 dark:bg-gray-700 border border-gray-800/10 dark:border-gray-100/10 hover:bg-cyan-300/50 dark:hover:bg-blue-600/50 first-of-type:rounded-l-full last-of-type:rounded-r-full last-of-type:border-l-0 overflow-hidden focus-visible:z-10"
+            >
+              <p
+                class="text-center p-3 transition-colors ease-out"
+                class:checked
+              >
+                {option.text}
+              </p>
+            </RadioGroupOption>
+          {/each}
         </RadioGroup>
       </div>
       <RangeSlider
@@ -194,3 +226,9 @@
     </div>
   </section>
 </main>
+
+<style>
+  .checked {
+    @apply bg-cyan-400 dark:bg-blue-600;
+  }
+</style>
