@@ -1,27 +1,27 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@sveltejs/vite-plugin-svelte': ^1.1.0
+  '@sveltejs/vite-plugin-svelte': ^1.1.1
   autoprefixer: ^10.4.13
-  neutral-ui: ^0.0.6
+  neutral-ui: ^0.0.7
   postcss: ^8.4.19
   postcss-load-config: ^4.0.1
   svelte: ^3.53.1
   svelte-preprocess: ^4.10.7
-  tailwindcss: ^3.2.3
+  tailwindcss: ^3.2.4
   vite: ^3.2.3
 
 dependencies:
-  neutral-ui: 0.0.6
+  neutral-ui: 0.0.7
 
 devDependencies:
-  '@sveltejs/vite-plugin-svelte': 1.1.0_svelte@3.53.1+vite@3.2.3
+  '@sveltejs/vite-plugin-svelte': 1.1.1_svelte@3.53.1+vite@3.2.3
   autoprefixer: 10.4.13_postcss@8.4.19
   postcss: 8.4.19
   postcss-load-config: 4.0.1_postcss@8.4.19
   svelte: 3.53.1
   svelte-preprocess: 4.10.7_g7z2chviobwh5b53nr2x4mtdq4
-  tailwindcss: 3.2.3_postcss@8.4.19
+  tailwindcss: 3.2.4_postcss@8.4.19
   vite: 3.2.3
 
 packages:
@@ -65,8 +65,8 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@sveltejs/vite-plugin-svelte/1.1.0_svelte@3.53.1+vite@3.2.3:
-    resolution: {integrity: sha512-cFRfEdztubtj1c/rYh7ArK7XCfFJn6wG6+J8/e9amFsKtEJILovoBrK0/mxt1AjPQg0vaX+fHPKvhx+q8mTPaQ==}
+  /@sveltejs/vite-plugin-svelte/1.1.1_svelte@3.53.1+vite@3.2.3:
+    resolution: {integrity: sha512-NzIaGIzWh5hCSMUoxukYEGmxFCWgzaVglqHJLV5r0BA7hHZbHXu8DYR80i6QUX4xyoQ4PZ8ir7SUYsThbreMcg==}
     engines: {node: ^14.18.0 || >= 16}
     peerDependencies:
       diff-match-patch: ^1.0.5
@@ -680,8 +680,8 @@ packages:
     hasBin: true
     dev: true
 
-  /neutral-ui/0.0.6:
-    resolution: {integrity: sha512-0ii7l0M4cVJfj1Mz3CqspO4lwMZ1o3X3PwSfkxy16E7YA76fQjHmuJkJjLxULtH0yNM4UZ2yW7n+9GIY0e9mtQ==}
+  /neutral-ui/0.0.7:
+    resolution: {integrity: sha512-A9wmOXQGqYr80C9aA92B3gR+4CqAetcx6WfaDwhJmIrHtGHc1iHLiuHyCroQNoUeax2mOUOGVdLjkB1g75uJjw==}
     dev: false
 
   /node-releases/2.0.6:
@@ -982,8 +982,8 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /tailwindcss/3.2.3_postcss@8.4.19:
-    resolution: {integrity: sha512-Xt9D4PK4zuuQCEB8bwK9JUCKmTgUwyac/6b0/42Vqhgl6YJkep+Wf5wq+5uXYfmrupdAD0YY2NY1hyZp1HjRrg==}
+  /tailwindcss/3.2.4_postcss@8.4.19:
+    resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:

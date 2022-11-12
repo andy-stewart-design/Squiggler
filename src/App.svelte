@@ -1,8 +1,8 @@
 <script>
   // @ts-nocheck
 
-  // TODO Toast
   // TODO slider component
+  // TODO Toast
   // TODO button components
   // TODO focus styles
   // TODO Typescript
@@ -136,19 +136,20 @@
       <div class="flex gap-3">
         <RadioGroup bind:value={flip} class="flex grow">
           <RadioGroupLabel>Squiggle Orientation</RadioGroupLabel>
-          {#each orientationOptions as option, index}
+          {#each orientationOptions as option}
             <RadioGroupOption
               value={option.val}
-              {index}
               let:checked
               class="grow bg-gray-200 dark:bg-gray-700 border border-gray-800/10 dark:border-gray-100/10 hover:bg-cyan-300/50 dark:hover:bg-blue-600/50 first-of-type:rounded-l-full last-of-type:rounded-r-full last-of-type:border-l-0 overflow-hidden focus-visible:z-10"
             >
-              <p
-                class="text-center p-3 transition-colors ease-out"
-                class:checked
-              >
-                {option.text}
-              </p>
+              <RadioGroupLabel inner class="grid">
+                <span
+                  class="text-center p-3 transition-colors ease-out"
+                  class:checked
+                >
+                  {option.text}
+                </span>
+              </RadioGroupLabel>
             </RadioGroupOption>
           {/each}
         </RadioGroup>
@@ -157,16 +158,17 @@
           {#each strokeCapOptions as option, index}
             <RadioGroupOption
               value={option.val}
-              {index}
               let:checked
               class="grow bg-gray-200 dark:bg-gray-700 border border-gray-800/10 dark:border-gray-100/10 hover:bg-cyan-300/50 dark:hover:bg-blue-600/50 first-of-type:rounded-l-full last-of-type:rounded-r-full last-of-type:border-l-0 overflow-hidden focus-visible:z-10"
             >
-              <p
-                class="text-center p-3 transition-colors ease-out"
-                class:checked
-              >
-                {option.text}
-              </p>
+              <RadioGroupLabel inner class="grid">
+                <span
+                  class="text-center p-3 transition-colors ease-out"
+                  class:checked
+                >
+                  {option.text}
+                </span>
+              </RadioGroupLabel>
             </RadioGroupOption>
           {/each}
         </RadioGroup>
