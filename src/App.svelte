@@ -16,13 +16,22 @@
   const offset = 20;
   const cY = size / 2;
   let strokeWeight = 3;
-  let strokeCap = "round";
   let frequency = 3;
   const ampSteps = 12;
   const ampMin = size / ampSteps;
   let amplitude = 6;
   let flowiness = 13.6619772367581;
   let flip = "default";
+  let strokeCap = "round";
+
+  const orientationOptions = [
+    { val: "default", text: "↑" },
+    { val: "flipped", text: "↓" },
+  ];
+  const strokeCapOptions = [
+    { val: "round", text: "●" },
+    { val: "butt", text: "■" },
+  ];
 
   function createPoints(freq, amp, flowiness, orientation) {
     const relAmp = ampMin * amp;
@@ -35,7 +44,7 @@
       return `M ${offset} ${cY + offset} l ${size} ${0}`;
     }
 
-    let dir = orientation === "flipped" ? -1 : 1;
+    let dir = orientation === "default" ? -1 : 1;
 
     const point0 = `M ${offset} ${cY + offset - (relAmp / 2) * dir}`;
     let point1;
@@ -86,15 +95,6 @@
     const svg = svgContainer.innerHTML;
     navigator.clipboard.writeText(svg);
   }
-
-  const orientationOptions = [
-    { val: "default", text: "↓" },
-    { val: "flipped", text: "↑" },
-  ];
-  const strokeCapOptions = [
-    { val: "round", text: "●" },
-    { val: "butt", text: "■" },
-  ];
 </script>
 
 <main
