@@ -1,6 +1,5 @@
 <script>
-  // @ts-nocheck
-
+  //@ts-nocheck
   // TODO slider component
   // TODO Toast
   // TODO button components
@@ -8,73 +7,98 @@
   // TODO Typescript
 
   import RangeSlider from "@components/RangeSlider.svelte";
-  import BaseRadioGroup from "./lib/components/BaseRadioGroup.svelte";
+  import BaseRadioGroup from "@components/BaseRadioGroup.svelte";
+  import { getRandom } from "@utils/math";
 
   let svgContainer;
 
   const size = 400;
+  const center = size / 2;
   const offset = 20;
-  const cY = size / 2;
-  let strokeWeight = 3;
-  let frequency = 3;
-  const ampSteps = 12;
-  const ampMin = size / ampSteps;
-  let amplitude = 6;
-  let flowiness = 13.6619772367581;
-  let flip = "default";
-  let strokeCap = "round";
 
+  let strokeWeight = 3;
+  const strokeRange = { min: 1, max: 10, step: 0.1 };
+
+  let frequency = 8;
+  const freqRange = { min: 2, max: 20, step: 1 };
+
+  let amplitude = 0.5;
+  const ampRange = { min: 0, max: 1, step: 0.01 };
+
+  let flow = 13.6619772367581;
+  const flowRange = { min: -220, max: 240, step: 0.1 };
+
+  let isRandom = false;
+  const randomOptions = [
+    { val: false, text: "D" },
+    { val: true, text: "R" },
+  ];
+
+  let orientation = "default";
   const orientationOptions = [
     { val: "default", text: "↑" },
     { val: "flipped", text: "↓" },
   ];
+
+  let strokeCap = "round";
   const strokeCapOptions = [
     { val: "round", text: "●" },
     { val: "butt", text: "■" },
   ];
 
-  function createPoints(freq, amp, flowiness, orientation) {
-    const relAmp = ampMin * amp;
-    const handleCount = size / (freq * 2);
-    const curveModifier = (flowiness / freq) * -1;
-    const initBez = Math.floor(handleCount - curveModifier);
-    const addBez = Math.ceil(handleCount + curveModifier);
+  const getCoordX = (f, i) => (size / f) * i + offset;
+  const getCoordY = (i) => center + center * i + offset;
 
-    if (relAmp <= 0) {
-      return `M ${offset} ${cY + offset} l ${size} ${0}`;
+  let random = getRandom(freqRange.max * 2 - 2, 0.2);
+
+  function createPoints(fr, a, o, fl, isR, r) {
+    if (a <= ampRange.min) {
+      return `M ${offset} ${center + offset} l ${size} ${0}`;
     }
 
-    let dir = orientation === "default" ? -1 : 1;
+    const handleCount = fr * 2 - 2;
+    const dir = o === "default" ? 1 : -1;
+    const curveModifier = fl / fr;
 
-    const point0 = `M ${offset} ${cY + offset - (relAmp / 2) * dir}`;
-    let point1;
+    const points = [];
+    let iterations = 0;
 
-    if (flowiness <= -200) {
-      point1 = `l ${size / freq} ${relAmp * dir}`;
-    } else {
-      point1 = `c ${initBez} ${0} ${addBez} 
-        ${relAmp * dir} 
-        ${size / freq} ${relAmp * dir}`;
-    }
+    for (let i = 1; i < handleCount; i += 1) {
+      let posY;
+      const isEven = iterations % 2 === 0;
+      if (isEven && isR) posY = a * dir * r[i];
+      else if (!isEven && isR) posY = -a * dir * r[i];
+      else if (isEven && !isR) posY = a * dir;
+      else posY = -a * dir;
 
-    const count = freq - 1;
-    const points = [point0, point1];
-    for (let i = 0; i < count; i++) {
-      dir *= -1;
-      if (flowiness <= -200) {
-        const point = `l ${size / freq} ${relAmp * dir}`;
+      if (i === 1) {
+        const midPoint = getCoordX(handleCount, 1);
+        const point = `M ${getCoordX(handleCount, 0)} ${getCoordY(-posY)}
+                       C ${midPoint + curveModifier}  ${getCoordY(-posY)}
+                         ${midPoint - curveModifier}  ${getCoordY(posY)}
+                         ${getCoordX(handleCount, 2)} ${getCoordY(posY)}`;
         points.push(point);
-      } else {
-        const point = `s ${addBez} ${relAmp * dir} 
-          ${size / freq} ${relAmp * dir}`;
+        iterations++;
+      } else if (i > 1 && i % 2 === 0) {
+        const midPoint = getCoordX(handleCount, i + 1);
+        const point = `S ${midPoint - curveModifier} ${getCoordY(posY)}
+                         ${getCoordX(handleCount, i + 2)} ${getCoordY(posY)}`;
         points.push(point);
+        iterations++;
       }
     }
 
     return points.join(" ");
   }
 
-  $: pathData = createPoints(frequency, amplitude, flowiness, flip);
+  $: pathData = createPoints(
+    frequency,
+    amplitude,
+    orientation,
+    flow,
+    isRandom,
+    random
+  );
 
   function downloadSVG() {
     const svg = svgContainer.innerHTML;
@@ -102,7 +126,7 @@
 >
   <section
     bind:this={svgContainer}
-    class="flex justify-center items-center grow p-8"
+    class="flex flex-col justify-center items-center grow p-8"
   >
     <svg
       class="w-full max-w-[90vh]"
@@ -118,14 +142,6 @@
         stroke-linecap={strokeCap}
         stroke-linejoin="round"
       />
-      <!-- <path
-        d="M10 10 l 200 100"
-        fill="none"
-        stroke="currentColor"
-        stroke-width={strokeWeight}
-        stroke-linecap={strokeCap}
-      /> -->
-      <!-- style="stroke-dasharray: 0 20 520 300; stroke-dashoffset: 1;" -->
     </svg>
   </section>
 
@@ -135,7 +151,7 @@
     >
       <div class="flex gap-3">
         <BaseRadioGroup
-          bind:value={flip}
+          bind:value={orientation}
           label="Orientation"
           options={orientationOptions}
         />
@@ -145,41 +161,54 @@
           options={strokeCapOptions}
         />
       </div>
+      <div class="flex gap-3">
+        <BaseRadioGroup
+          bind:value={isRandom}
+          label="Ransomness"
+          options={randomOptions}
+        />
+        <button
+          on:click={() => (random = getRandom(freqRange.max * 2 - 2, 0.2))}
+          class="grow text-center bg-gray-50 dark:bg-gray-700 hover:bg-cyan-300 dark:hover:bg-blue-600/60 rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
+        >
+          Randomize
+        </button>
+      </div>
       <RangeSlider
         bind:value={frequency}
         name="frequency"
-        min="1"
-        max="12"
-        step="1"
+        min={freqRange.min}
+        max={freqRange.max}
+        step={freqRange.step}
         counter="value"
       >
         Frequency
       </RangeSlider>
       <RangeSlider
         bind:value={amplitude}
+        min={ampRange.min}
+        max={ampRange.max}
+        step={ampRange.step}
         name="amplitude"
-        min="0"
-        max={ampSteps}
-        step="0.1"
       >
         Size
       </RangeSlider>
       <RangeSlider
         bind:value={strokeWeight}
+        min={strokeRange.min}
+        max={strokeRange.max}
+        step={strokeRange.step}
         name="stroke-weight"
-        min="1"
-        max="10"
-        step="0.1"
         counter="value"
       >
         Weight
       </RangeSlider>
       <RangeSlider
-        bind:value={flowiness}
+        bind:value={flow}
+        min={flowRange.min}
+        max={flowRange.max}
+        step={flowRange.step}
         name="flowiness"
-        min="-200"
-        max="220"
-        step="0.1"
       >
         Flow
       </RangeSlider>
