@@ -43,7 +43,7 @@
     step: 0.01,
     bigStep: 1,
     label: "Amplitude",
-    counter: "decimal",
+    counter: "percentage",
   };
 
   let flow = 13.6619772367581;
@@ -53,7 +53,7 @@
     step: 0.1,
     bigStep: 10,
     label: "Flow",
-    counter: "decimal",
+    counter: "percentage",
   };
 
   let isRandom = false;

@@ -25,6 +25,7 @@
   {...containerProps}
   class="relative flex flex-col gap-4 w-full pb-3"
   let:resetValue
+  let:progress
 >
   <div class="flex justify-between text-sm tabular-nums">
     <div class="flex gap-2">
@@ -38,6 +39,8 @@
     </div>
     {#if counter === "decimal"}
       <p>{value.toFixed(1)}</p>
+    {:else if counter === "percentage"}
+      <p>{`${Math.floor(progress)}%`}</p>
     {:else}
       <p>{value}</p>
     {/if}
