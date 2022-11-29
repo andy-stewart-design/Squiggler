@@ -1,13 +1,13 @@
 <script>
   //@ts-nocheck
-  // TODO slider component
   // TODO Toast
   // TODO button components
   // TODO focus styles
   // TODO Typescript
 
-  import RangeSlider from "@components/RangeSlider.svelte";
   import BaseRadioGroup from "@components/BaseRadioGroup.svelte";
+  import BaseRangeSlider from "./lib/components/BaseRangeSlider.svelte";
+  import BaseSwitch from "./lib/components/BaseSwitch.svelte";
   import { getRandom } from "@utils/math";
 
   let svgContainer;
@@ -17,16 +17,44 @@
   const offset = 20;
 
   let strokeWeight = 3;
-  const strokeRange = { min: 1, max: 10, step: 0.1 };
+  const strokeProps = {
+    min: 1,
+    max: 10,
+    step: 0.1,
+    step: 0.1,
+    bigStep: 1,
+    label: "Weight",
+    counter: "decimal",
+  };
 
   let frequency = 8;
-  const freqRange = { min: 2, max: 20, step: 1 };
+  const freqProps = {
+    min: 2,
+    max: 20,
+    step: 1,
+    bigStep: 2,
+    label: "Frequency",
+  };
 
   let amplitude = 0.5;
-  const ampRange = { min: 0, max: 1, step: 0.01 };
+  const ampProps = {
+    min: 0,
+    max: 1,
+    step: 0.01,
+    bigStep: 1,
+    label: "Amplitude",
+    counter: "decimal",
+  };
 
   let flow = 13.6619772367581;
-  const flowRange = { min: -220, max: 240, step: 0.1 };
+  const flowProps = {
+    min: -220,
+    max: 240,
+    step: 0.1,
+    bigStep: 10,
+    label: "Flow",
+    counter: "decimal",
+  };
 
   let isRandom = false;
   const randomOptions = [
@@ -36,23 +64,25 @@
 
   let orientation = "default";
   const orientationOptions = [
-    { val: "default", text: "↑" },
-    { val: "flipped", text: "↓" },
+    { val: "default", text: "↓" },
+    { val: "flipped", text: "↑" },
   ];
+  const orientProps = { label: "Orientation", options: orientationOptions };
 
   let strokeCap = "round";
   const strokeCapOptions = [
     { val: "round", text: "●" },
     { val: "butt", text: "■" },
   ];
+  const capProps = { label: "Stroke Style", options: strokeCapOptions };
 
   const getCoordX = (f, i) => (size / f) * i + offset;
   const getCoordY = (i) => center + center * i + offset;
 
-  let random = getRandom(freqRange.max * 2 - 2, 0.2);
+  let random = getRandom(freqProps.max * 2 - 2, 0.2);
 
   function createPoints(fr, a, o, fl, isR, r) {
-    if (a <= ampRange.min) {
+    if (a <= ampProps.min) {
       return `M ${offset} ${center + offset} l ${size} ${0}`;
     }
 
@@ -122,7 +152,7 @@
 </script>
 
 <main
-  class="flex portrait:flex-col landscape:flex-row gap-4 p-8 xl:px-16 w-screen h-screen overflow-hidden"
+  class="flex portrait:flex-col landscape:flex-row gap-4 p-8 xl:px-16 w-screen h-screen landscape:overflow-hidden"
 >
   <section
     bind:this={svgContainer}
@@ -147,81 +177,52 @@
 
   <section class="landscape:flex landscape:items-center">
     <div
-      class="flex flex-col gap-6 font-medium text-sm p-6 bg-gray-100 dark:bg-gray-800 border border-gray-900/10 dark:border-gray-100/5 rounded-2xl shadow-2xl min-w-[300px]"
+      class="flex flex-col gap-6 font-medium text-sm p-6 bg-gray-100 dark:bg-gray-900 border border-gray-900/10 dark:border-gray-100/10 rounded-2xl shadow-2xl min-w-[320px]"
     >
-      <div class="flex gap-3">
-        <BaseRadioGroup
-          bind:value={orientation}
-          label="Orientation"
-          options={orientationOptions}
-        />
-        <BaseRadioGroup
-          bind:value={strokeCap}
-          label="Stroke Cap Style"
-          options={strokeCapOptions}
-        />
+      <div class="flex flex-col gap-4">
+        <BaseRadioGroup bind:value={orientation} {...orientProps} />
+        <BaseRadioGroup bind:value={strokeCap} {...capProps} />
+        <div class="flex gap-2">
+          <BaseSwitch bind:value={isRandom} />
+          <button
+            on:click={() => (random = getRandom(freqProps.max * 2 - 2, 0.2))}
+            class="p-1"
+            class:opacity-25={!isRandom}
+            disabled={!isRandom}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
-      <div class="flex gap-3">
-        <BaseRadioGroup
-          bind:value={isRandom}
-          label="Ransomness"
-          options={randomOptions}
-        />
-        <button
-          on:click={() => (random = getRandom(freqRange.max * 2 - 2, 0.2))}
-          class="grow text-center bg-gray-50 dark:bg-gray-700 hover:bg-cyan-300 dark:hover:bg-blue-600/60 rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
-        >
-          Randomize
-        </button>
+      <div class="border-t border-black/10 dark:border-gray-100/10" />
+      <div class="flex flex-col gap-3">
+        <BaseRangeSlider bind:value={frequency} {...freqProps} />
+        <BaseRangeSlider bind:value={amplitude} {...ampProps} />
+        <BaseRangeSlider bind:value={strokeWeight} {...strokeProps} />
+        <BaseRangeSlider bind:value={flow} {...flowProps} />
       </div>
-      <RangeSlider
-        bind:value={frequency}
-        name="frequency"
-        min={freqRange.min}
-        max={freqRange.max}
-        step={freqRange.step}
-        counter="value"
-      >
-        Frequency
-      </RangeSlider>
-      <RangeSlider
-        bind:value={amplitude}
-        min={ampRange.min}
-        max={ampRange.max}
-        step={ampRange.step}
-        name="amplitude"
-      >
-        Size
-      </RangeSlider>
-      <RangeSlider
-        bind:value={strokeWeight}
-        min={strokeRange.min}
-        max={strokeRange.max}
-        step={strokeRange.step}
-        name="stroke-weight"
-        counter="value"
-      >
-        Weight
-      </RangeSlider>
-      <RangeSlider
-        bind:value={flow}
-        min={flowRange.min}
-        max={flowRange.max}
-        step={flowRange.step}
-        name="flowiness"
-      >
-        Flow
-      </RangeSlider>
-      <div class="flex gap-3 pt-2">
+      <div class="border-t border-black/10 dark:border-gray-100/10" />
+      <div class="flex gap-3">
         <button
           on:click={copySVG}
-          class="grow text-center bg-gray-50 dark:bg-gray-700 hover:bg-cyan-300 dark:hover:bg-blue-600/60 rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
+          class="grow text-center bg-gray-50 dark:bg-gray-800 hover:bg-cyan-300 dark:hover:bg-brand rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
         >
           Copy SVG
         </button>
         <button
           on:click={downloadSVG}
-          class="grow text-center bg-gray-50 dark:bg-gray-700 hover:bg-cyan-300 dark:hover:bg-blue-600/60 rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
+          class="grow text-center bg-gray-50 dark:bg-gray-800 hover:bg-cyan-300 dark:hover:bg-brand rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
         >
           Download
         </button>
