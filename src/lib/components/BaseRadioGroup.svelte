@@ -2,6 +2,7 @@
   import { RadioGroup, RadioGroupLabel, RadioGroupOption } from "neutral-ui";
 
   export let value;
+  export let icon = false;
   export let label;
   export let options;
 </script>
@@ -16,10 +17,14 @@
     >
       <RadioGroupLabel inner class="grid">
         <span
-          class="text-center py-2 px-4 transition-colors ease-out"
+          class="flex justify-center items-center text-center w-12 h-9 transition-colors ease-out"
           class:checked
         >
-          {option.text}
+          {#if !icon}
+            <span class="px-1">{option.text}</span>
+          {:else}
+            <svelte:component this={option.text} />
+          {/if}
         </span>
       </RadioGroupLabel>
     </RadioGroupOption>

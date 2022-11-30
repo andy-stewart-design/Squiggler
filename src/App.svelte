@@ -8,6 +8,10 @@
   import BaseRadioGroup from "@components/BaseRadioGroup.svelte";
   import BaseRangeSlider from "./lib/components/BaseRangeSlider.svelte";
   import BaseSwitch from "./lib/components/BaseSwitch.svelte";
+  import CapRound from "./lib/components/icons/CapRound.svelte";
+  import CapSquare from "./lib/components/icons/CapSquare.svelte";
+  import OrientationDefault from "./lib/components/icons/OrientationDefault.svelte";
+  import OrientationFlipped from "./lib/components/icons/OrientationFlipped.svelte";
   import { getRandom } from "@utils/math";
 
   let svgContainer;
@@ -57,24 +61,28 @@
   };
 
   let isRandom = false;
-  const randomOptions = [
-    { val: false, text: "D" },
-    { val: true, text: "R" },
-  ];
 
   let orientation = "default";
   const orientationOptions = [
-    { val: "default", text: "↓" },
-    { val: "flipped", text: "↑" },
+    { val: "default", text: OrientationDefault },
+    { val: "flipped", text: OrientationFlipped },
   ];
-  const orientProps = { label: "Orientation", options: orientationOptions };
+  const orientProps = {
+    label: "Orientation",
+    options: orientationOptions,
+    icon: true,
+  };
 
   let strokeCap = "round";
   const strokeCapOptions = [
-    { val: "round", text: "●" },
-    { val: "butt", text: "■" },
+    { val: "round", text: CapRound },
+    { val: "butt", text: CapSquare },
   ];
-  const capProps = { label: "Stroke Style", options: strokeCapOptions };
+  const capProps = {
+    label: "Stroke Style",
+    options: strokeCapOptions,
+    icon: true,
+  };
 
   const getCoordX = (f, i) => (size / f) * i + offset;
   const getCoordY = (i) => center + center * i + offset;
@@ -197,9 +205,7 @@
               class="w-5 h-5"
             >
               <path
-                fill-rule="evenodd"
-                d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z"
-                clip-rule="evenodd"
+                d="M2 7H1C1 7.55228 1.44772 8 2 8V7ZM3.07026 6L3.75297 6.73068L3.8615 6.62929L3.93586 6.50073L3.07026 6ZM18 13H19C19 12.4477 18.5523 12 18 12L18 13ZM10 18L10 17L10 18ZM16.9297 14L16.247 13.2693L16.1385 13.3707L16.0641 13.4993L16.9297 14ZM8 6H2V8H8V6ZM3 7V1H1V7H3ZM10 3C13.866 3 17 6.13401 17 10H19C19 5.02944 14.9706 1 10 1V3ZM3.93586 6.50073C5.14771 4.40581 7.41027 3 10 3V1C6.66747 1 3.75928 2.81178 2.20465 5.49927L3.93586 6.50073ZM2.38754 5.26932L1.31728 6.26932L2.68272 7.73068L3.75297 6.73068L2.38754 5.26932ZM12 14L18 14L18 12L12 12L12 14ZM17 13V19H19V13H17ZM10 17C6.13401 17 3 13.866 3 10L1 10C1 14.9706 5.02944 19 10 19L10 17ZM16.0641 13.4993C14.8523 15.5942 12.5897 17 10 17L10 19C13.3325 19 16.2407 17.1882 17.7953 14.5007L16.0641 13.4993ZM17.6125 14.7307L18.6827 13.7307L17.3173 12.2693L16.247 13.2693L17.6125 14.7307Z"
               />
             </svg>
           </button>
