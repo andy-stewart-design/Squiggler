@@ -1,17 +1,22 @@
 <script>
   //@ts-nocheck
-  // TODO Toast
+  // TODO Typeface
+  // TODO Nav
   // TODO button components
   // TODO focus styles
+  // TODO break up main app into components
+  // TODO
   // TODO Typescript
 
   import BaseRadioGroup from "@components/BaseRadioGroup.svelte";
   import BaseRangeSlider from "./lib/components/BaseRangeSlider.svelte";
   import BaseSwitch from "./lib/components/BaseSwitch.svelte";
-  import CapRound from "./lib/components/icons/CapRound.svelte";
-  import CapSquare from "./lib/components/icons/CapSquare.svelte";
-  import OrientationDefault from "./lib/components/icons/OrientationDefault.svelte";
-  import OrientationFlipped from "./lib/components/icons/OrientationFlipped.svelte";
+  import Toasts from "./lib/components/Toasts.svelte";
+  import CapRound from "./lib/icons/CapRound.svelte";
+  import CapSquare from "./lib/icons/CapSquare.svelte";
+  import OrientationDefault from "./lib/icons/OrientationDefault.svelte";
+  import OrientationFlipped from "./lib/icons/OrientationFlipped.svelte";
+  import { toasts, addToast } from "./lib/stores/toasts";
   import { getRandom } from "@utils/math";
 
   let svgContainer;
@@ -151,11 +156,13 @@
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+    addToast({ message: "Check your downloads" });
   }
 
   function copySVG() {
     const svg = svgContainer.innerHTML;
     navigator.clipboard.writeText(svg);
+    addToast({ message: "Copied to clipboard" });
   }
 </script>
 
@@ -222,13 +229,13 @@
       <div class="flex gap-3">
         <button
           on:click={copySVG}
-          class="grow text-center bg-gray-50 dark:bg-gray-800 hover:bg-cyan-300 dark:hover:bg-brand rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
+          class="grow text-center bg-gray-50 dark:bg-gray-700 hover:bg-cyan-300 dark:hover:bg-brand rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
         >
           Copy SVG
         </button>
         <button
           on:click={downloadSVG}
-          class="grow text-center bg-gray-50 dark:bg-gray-800 hover:bg-cyan-300 dark:hover:bg-brand rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
+          class="grow text-center bg-gray-50 dark:bg-gray-700 hover:bg-cyan-300 dark:hover:bg-brand rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
         >
           Download
         </button>
@@ -236,3 +243,4 @@
     </div>
   </section>
 </main>
+<Toasts />
