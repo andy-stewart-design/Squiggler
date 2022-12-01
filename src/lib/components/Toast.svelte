@@ -10,7 +10,7 @@
 </script>
 
 <article
-  class="relative flex items-center min-w-[240px] bg-brand rounded"
+  class="relative flex items-center min-w-[240px] bg-brand text-gray-100 rounded"
   role="alert"
   in:fly={{ x: -40, duration: 300, easing: cubicOut }}
   out:fade={{ duration: 300, easing: cubicOut }}

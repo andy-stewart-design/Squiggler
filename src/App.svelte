@@ -1,7 +1,7 @@
 <script>
   //@ts-nocheck
-  // TODO Nav
   // TODO Check light theme
+  // TODO Nav
   // -------------
   // TODO button components
   // TODO focus styles
@@ -25,8 +25,9 @@
   const size = 400;
   const center = size / 2;
   const offset = 20;
+  const strokeColor = "#1761ff";
 
-  let strokeWeight = 3;
+  let strokeWeight = 4;
   const strokeProps = {
     min: 1,
     max: 10,
@@ -144,8 +145,14 @@
     random
   );
 
-  function downloadSVG() {
+  function getSVG() {
+    const classRegex = /class="(.*?)(?<!\\)"/g;
     const svg = svgContainer.innerHTML;
+    return svg.replace(classRegex, "").replace("#1f55c9", "currentColor");
+  }
+
+  function downloadSVG() {
+    const svg = getSVG();
     const filetype = "data:image/svg+xml;charset=utf-8,";
 
     const element = document.createElement("a");
@@ -161,7 +168,7 @@
   }
 
   function copySVG() {
-    const svg = svgContainer.innerHTML;
+    const svg = getSVG();
     navigator.clipboard.writeText(svg);
     addToast({ message: "Copied to clipboard" });
   }
@@ -183,7 +190,7 @@
         d={pathData}
         id="wave"
         fill="none"
-        stroke="currentColor"
+        stroke={strokeColor}
         stroke-width={strokeWeight}
         stroke-linecap={strokeCap}
         stroke-linejoin="round"
@@ -193,7 +200,7 @@
 
   <section class="landscape:flex landscape:items-center">
     <div
-      class="flex flex-col gap-6 font-medium text-sm p-6 bg-gray-100 dark:bg-gray-900 border border-gray-900/10 dark:border-gray-100/10 rounded-2xl shadow-2xl min-w-[320px]"
+      class="flex flex-col gap-6 font-medium text-sm p-6 bg-gray-100 dark:bg-gray-800 border border-gray-900/10 dark:border-gray-100/10 rounded-2xl shadow-2xl min-w-[320px]"
     >
       <div class="flex flex-col gap-4">
         <BaseRadioGroup bind:value={orientation} {...orientProps} />
@@ -202,8 +209,8 @@
           <BaseSwitch bind:value={isRandom} />
           <button
             on:click={() => (random = getRandom(freqProps.max * 2 - 2, 0.2))}
-            class="p-1"
-            class:opacity-25={!isRandom}
+            class="p-1 transition-colors ease-out hover:text-brand"
+            class:random-button-active={!isRandom}
             disabled={!isRandom}
           >
             <svg
@@ -230,13 +237,13 @@
       <div class="flex gap-3">
         <button
           on:click={copySVG}
-          class="grow text-center bg-gray-50 dark:bg-gray-700 hover:bg-cyan-300 dark:hover:bg-brand rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
+          class="grow text-center bg-gray-50 dark:bg-gray-600 hover:bg-brand hover:text-white rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
         >
           Copy SVG
         </button>
         <button
           on:click={downloadSVG}
-          class="grow text-center bg-gray-50 dark:bg-gray-700 hover:bg-cyan-300 dark:hover:bg-brand rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
+          class="grow text-center bg-gray-50 dark:bg-gray-600 hover:bg-brand hover:text-white rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
         >
           Download
         </button>
@@ -245,3 +252,9 @@
   </section>
 </main>
 <Toasts />
+
+<style>
+  .random-button-active {
+    @apply opacity-25 hover:text-current;
+  }
+</style>
