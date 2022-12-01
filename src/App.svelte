@@ -1,12 +1,9 @@
 <script>
   //@ts-nocheck
-  // TODO Check light theme
-  // TODO Nav
-  // -------------
   // TODO button components
   // TODO focus styles
   // TODO break up main app into components
-  // TODO
+  // TODO Nav
   // TODO Typescript
 
   import BaseRadioGroup from "@components/BaseRadioGroup.svelte";
