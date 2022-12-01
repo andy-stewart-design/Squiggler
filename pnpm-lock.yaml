@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@sveltejs/vite-plugin-svelte': ^1.3.1
   autoprefixer: ^10.4.13
-  neutral-ui: ^0.1.7
+  neutral-ui: ^0.1.8
   postcss: ^8.4.19
   postcss-load-config: ^4.0.1
   svelte: ^3.53.1
@@ -12,7 +12,7 @@ specifiers:
   vite: ^3.2.4
 
 dependencies:
-  neutral-ui: 0.1.7
+  neutral-ui: 0.1.8
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte': 1.3.1_svelte@3.53.1+vite@3.2.4
@@ -681,8 +681,8 @@ packages:
     hasBin: true
     dev: true
 
-  /neutral-ui/0.1.7:
-    resolution: {integrity: sha512-sDArtgW05/A8sKCXOMOJAgqyDt5Gk3VP4W9FhyLNFWUj+cHZ8WAFpN5KAx7j7wRJrcGNS531mGsiOe+Zd10RoA==}
+  /neutral-ui/0.1.8:
+    resolution: {integrity: sha512-OWWocBPy2YpxHHMpJhXfBf9fknQI1W4/jUOR3uYlgxO3Rznav8ltNfH4SCk910qtG/OPx5YPOJzeAdENaZQWPg==}
     dev: false
 
   /node-releases/2.0.6:

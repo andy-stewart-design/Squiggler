@@ -11,5 +11,10 @@ export const getRandom = (n, min = 0) => {
     }
     numbers.push(number);
   }
+  // const uIntArray = new Uint32Array(n);
+  // const cryptoNums = [...crypto.getRandomValues(uIntArray)];
+  // const randomNums = cryptoNums.map((n) =>
+  //   n > 999999999 ? n / 10000000000 : n / 1000000000
+  // );
   return numbers;
 };
