@@ -1,9 +1,18 @@
+/** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
 
 const config = {
   content: ["./src/**/*.{html,js,svelte,ts}"],
 
   theme: {
+    fontFamily: {
+      sans: ["Space Grot", ...defaultTheme.fontFamily.sans],
+    },
+    fontWeight: {
+      medium: 450,
+    },
     extend: {
       colors: {
         brand: colors.blue[600],

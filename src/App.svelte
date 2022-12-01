@@ -1,7 +1,8 @@
 <script>
   //@ts-nocheck
-  // TODO Typeface
   // TODO Nav
+  // TODO Check light theme
+  // -------------
   // TODO button components
   // TODO focus styles
   // TODO break up main app into components
@@ -16,7 +17,7 @@
   import CapSquare from "./lib/icons/CapSquare.svelte";
   import OrientationDefault from "./lib/icons/OrientationDefault.svelte";
   import OrientationFlipped from "./lib/icons/OrientationFlipped.svelte";
-  import { toasts, addToast } from "./lib/stores/toasts";
+  import { addToast } from "./lib/stores/toasts";
   import { getRandom } from "@utils/math";
 
   let svgContainer;
