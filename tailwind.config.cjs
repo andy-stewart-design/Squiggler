@@ -15,6 +15,10 @@ const config = {
       medium: 450,
       bold: 550,
     },
+    screens: {
+      xs: "475px",
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         brand: "#1761ff",

@@ -172,7 +172,7 @@
 </script>
 
 <main
-  class="flex portrait:flex-col landscape:flex-row gap-4 p-8 xl:px-16 w-screen h-screen landscape:overflow-hidden"
+  class="flex portrait:flex-col landscape:flex-row gap-4 p-2 xs:px-8 xl:px-16 w-screen h-screen landscape:overflow-hidden"
 >
   <section
     bind:this={svgContainer}
@@ -197,7 +197,7 @@
 
   <section class="landscape:flex landscape:items-center">
     <div
-      class="flex flex-col gap-6 font-medium text-sm p-6 bg-gray-100 dark:bg-gray-800 border border-gray-900/10 dark:border-gray-100/10 rounded-2xl shadow-2xl min-w-[320px]"
+      class="flex flex-col gap-6 font-medium text-sm p-6 bg-gray-100 dark:bg-gray-800 border border-gray-900/10 dark:border-gray-100/10 rounded-2xl shadow-2xl min-w-[320px] h-auto max-h-[calc(100vh-1rem)] overflow-y-auto"
     >
       <div class="flex flex-col gap-4">
         <BaseRadioGroup bind:value={orientation} {...orientProps} />
@@ -205,7 +205,8 @@
         <div class="flex gap-2">
           <BaseSwitch bind:value={isRandom} />
           <button
-            on:click={() => (random = getRandom(freqProps.max * 2 - 2, 0.2))}
+            on:click|preventDefault={() =>
+              (random = getRandom(freqProps.max * 2 - 2, 0.2))}
             class="p-1 transition-colors ease-out hover:text-brand"
             class:random-button-active={!isRandom}
             disabled={!isRandom}
@@ -233,13 +234,13 @@
       <div class="border-t border-black/10 dark:border-gray-100/10" />
       <div class="flex gap-3">
         <button
-          on:click={copySVG}
+          on:click|preventDefault={copySVG}
           class="grow text-center bg-gray-50 dark:bg-gray-600 hover:bg-brand hover:text-white rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
         >
           Copy SVG
         </button>
         <button
-          on:click={downloadSVG}
+          on:click|preventDefault={downloadSVG}
           class="grow text-center bg-gray-50 dark:bg-gray-600 hover:bg-brand hover:text-white rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
         >
           Download

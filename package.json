@@ -19,6 +19,6 @@
     "vite": "^3.2.4"
   },
   "dependencies": {
-    "neutral-ui": "^0.2.2"
+    "neutral-ui": "^0.2.3"
   }
 }
