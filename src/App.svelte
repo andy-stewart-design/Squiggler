@@ -224,7 +224,7 @@
         </div>
       </div>
       <div class="border-t border-black/10 dark:border-gray-100/10" />
-      <div class="flex flex-col gap-3">
+      <div class="flex flex-col gap-1">
         <BaseRangeSlider bind:value={frequency} {...freqProps} />
         <BaseRangeSlider bind:value={amplitude} {...ampProps} />
         <BaseRangeSlider bind:value={strokeWeight} {...strokeProps} />

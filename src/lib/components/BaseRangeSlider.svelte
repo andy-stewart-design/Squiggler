@@ -23,7 +23,7 @@
 <RangeSlider
   bind:value
   {...containerProps}
-  class="relative flex flex-col gap-4 w-full pb-3"
+  class="relative flex flex-col gap-2 w-full pb-3"
   let:resetValue
   let:progress
 >
