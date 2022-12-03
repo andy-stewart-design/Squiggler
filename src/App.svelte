@@ -1,12 +1,11 @@
-<script>
-  //@ts-nocheck
+<script lang="ts">
   // TODO button components
   // TODO focus styles
   // TODO break up main app into components
   // TODO Nav
   // TODO Typescript
 
-  import BaseRadioGroup from "@components/BaseRadioGroup.svelte";
+  import BaseRadioGroup from "./lib/components/BaseRadioGroup.svelte";
   import BaseRangeSlider from "./lib/components/BaseRangeSlider.svelte";
   import BaseSwitch from "./lib/components/BaseSwitch.svelte";
   import Toasts from "./lib/components/Toasts.svelte";
@@ -15,9 +14,10 @@
   import OrientationDefault from "./lib/icons/OrientationDefault.svelte";
   import OrientationFlipped from "./lib/icons/OrientationFlipped.svelte";
   import { addToast } from "./lib/stores/toasts";
-  import { getRandom } from "@utils/math";
+  import type { StrokeLineCap } from "./lib/types/app";
+  import { getRandom } from "./lib/utils/math";
 
-  let svgContainer;
+  let svgContainer: HTMLElement;
 
   const size = 400;
   const center = size / 2;
@@ -28,7 +28,6 @@
   const strokeProps = {
     min: 1,
     max: 10,
-    step: 0.1,
     step: 0.1,
     bigStep: 1,
     label: "Weight",
@@ -77,7 +76,7 @@
     icon: true,
   };
 
-  let strokeCap = "round";
+  let strokeCap: StrokeLineCap = "round";
   const strokeCapOptions = [
     { val: "round", text: CapRound },
     { val: "butt", text: CapSquare },
