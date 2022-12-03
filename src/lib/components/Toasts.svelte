@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { flip } from "svelte/animate";
   import { cubicOut } from "svelte/easing";
   import Toast from "./Toast.svelte";

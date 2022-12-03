@@ -1,15 +1,16 @@
 import { writable } from "svelte/store";
+import type { Toast } from "../types/app";
 
-export const toasts = writable([]);
+export const toasts = writable<Toast[]>([]);
 
-export const dismissToast = (id) => {
+export const dismissToast = (id: string) => {
   toasts.update((all) => all.filter((t) => t.id !== id));
 };
 
-export const addToast = (toast) => {
+export const addToast = (toast: Toast) => {
   const id = crypto.randomUUID().split("-").pop();
 
-  const defaults = {
+  const defaults: Toast = {
     id,
     message: "Default message",
     type: "success",
@@ -17,7 +18,7 @@ export const addToast = (toast) => {
     timeout: 3000,
   };
 
-  const newToast = { ...defaults, ...toast };
+  const newToast: Toast = { ...defaults, ...toast };
 
   toasts.update((all) => [newToast, ...all]);
 

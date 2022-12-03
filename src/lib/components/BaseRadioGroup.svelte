@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
   import { RadioGroup, RadioGroupLabel, RadioGroupOption } from "neutral-ui";
+  import type { Value } from "neutral-ui/radio-group/types";
+  import type { RadioOption } from "../types/app";
 
-  export let value;
-  export let icon = false;
-  export let label;
-  export let options;
+  export let value: Value;
+  export let label: string;
+  export let options: RadioOption[];
 </script>
 
 <RadioGroup bind:value class="flex items-center">
@@ -20,10 +21,10 @@
           class="flex justify-center items-center text-center w-12 h-9 transition-colors ease-out"
           class:checked
         >
-          {#if !icon}
+          {#if option.text}
             <span class="px-1">{option.text}</span>
-          {:else}
-            <svelte:component this={option.text} />
+          {:else if option.component}
+            <svelte:component this={option.component} />
           {/if}
         </span>
       </RadioGroupLabel>

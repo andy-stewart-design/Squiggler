@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import {
     RangeSlider,
     RangeSliderLabel,
@@ -7,12 +7,12 @@
     RangeSliderProgress,
   } from "neutral-ui";
 
-  export let value;
-  export let min;
-  export let max;
-  export let step;
-  export let bigStep;
-  export let label;
+  export let value: number;
+  export let min: number;
+  export let max: number;
+  export let step: number;
+  export let bigStep: number;
+  export let label: string;
   export let counter = "value";
 
   let defaultValue = value;
@@ -56,9 +56,3 @@
     />
   </RangeSliderTrack>
 </RangeSlider>
-
-<!-- <style scoped>
-  .reset-hover {
-    @apply opacity-70;
-  }
-</style> -->

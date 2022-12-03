@@ -3,7 +3,6 @@
   // TODO focus styles
   // TODO break up main app into components
   // TODO Nav
-  // TODO Typescript
 
   import BaseRadioGroup from "./lib/components/BaseRadioGroup.svelte";
   import BaseRangeSlider from "./lib/components/BaseRangeSlider.svelte";
@@ -14,7 +13,11 @@
   import OrientationDefault from "./lib/icons/OrientationDefault.svelte";
   import OrientationFlipped from "./lib/icons/OrientationFlipped.svelte";
   import { addToast } from "./lib/stores/toasts";
-  import type { StrokeLineCap } from "./lib/types/app";
+  import type {
+    OrientationVal,
+    RadioOption,
+    StrokeCapVal,
+  } from "./lib/types/app";
   import { getRandom } from "./lib/utils/math";
 
   let svgContainer: HTMLElement;
@@ -65,26 +68,24 @@
 
   let isRandom = false;
 
-  let orientation = "default";
-  const orientationOptions = [
-    { val: "default", text: OrientationDefault },
-    { val: "flipped", text: OrientationFlipped },
+  let orientation: OrientationVal = "default";
+  const orientationOptions: RadioOption[] = [
+    { val: "default", component: OrientationDefault },
+    { val: "flipped", component: OrientationFlipped },
   ];
   const orientProps = {
     label: "Orientation",
     options: orientationOptions,
-    icon: true,
   };
 
-  let strokeCap: StrokeLineCap = "round";
-  const strokeCapOptions = [
-    { val: "round", text: CapRound },
-    { val: "butt", text: CapSquare },
+  let strokeCap: StrokeCapVal = "round";
+  const strokeCapOptions: RadioOption[] = [
+    { val: "round", component: CapRound },
+    { val: "butt", component: CapSquare },
   ];
   const capProps = {
     label: "Stroke Style",
     options: strokeCapOptions,
-    icon: true,
   };
 
   const getCoordX = (f, i) => (size / f) * i + offset;

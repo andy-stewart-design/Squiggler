@@ -4,11 +4,11 @@ export const map = (
   end1: number,
   start2: number,
   end2: number
-) => {
+): number => {
   return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
 };
 
-export const getRandom = (n, min = 0) => {
+export const getRandom = (n: number, min = 0): number[] => {
   let numbers = [];
   for (let i = 0; i < n; i++) {
     let number = 0;

@@ -1,12 +1,14 @@
-<script>
+<script lang="ts">
   import { Switch, SwitchLabel } from "neutral-ui";
 
-  export let value;
+  export let value: boolean;
 </script>
 
 <div class="grow flex justify-between items-center gap-2">
   <Switch bind:value class={value ? "switch-bg switch-bg-active" : "switch-bg"}>
-    <SwitchLabel slot="start"><span>Randomize</span></SwitchLabel>
+    <SwitchLabel slot="start"
+      ><span class="select-none">Randomize</span></SwitchLabel
+    >
     <div
       class="w-6 h-6 bg-white rounded-full transition-transform left"
       class:switch-thumb-active={value}
