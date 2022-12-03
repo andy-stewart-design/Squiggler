@@ -41,7 +41,7 @@ export const ampProps = {
   min: 0,
   max: 1,
   step: 0.01,
-  bigStep: 1,
+  bigStep: 0.1,
   label: "Amplitude",
   counter: "percentage",
 };
