@@ -3,7 +3,6 @@
   import BaseRangeSlider from "../components/BaseRangeSlider.svelte";
   import BaseSwitch from "../components/BaseSwitch.svelte";
   import {
-    frequency,
     freqProps,
     amplitude,
     ampProps,
@@ -20,6 +19,8 @@
   } from "../stores/path";
   import { getRandom } from "../utils/math";
   import { copySVG, downloadSVG } from "../utils/svg";
+
+  export let frequency: number;
 
   export let svgContainer: HTMLElement;
 </script>
@@ -54,7 +55,7 @@
   </div>
   <div class="border-t border-black/10 dark:border-gray-100/10" />
   <div class="flex flex-col gap-1">
-    <BaseRangeSlider bind:value={$frequency} {...freqProps} />
+    <BaseRangeSlider bind:value={frequency} {...freqProps} />
     <BaseRangeSlider bind:value={$amplitude} {...ampProps} />
     <BaseRangeSlider bind:value={$strokeWeight} {...strokeProps} />
     <BaseRangeSlider bind:value={$flow} {...flowProps} />
