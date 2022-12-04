@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    frequency,
     amplitude,
     ampProps,
     flow,
@@ -12,7 +13,7 @@
   } from "../stores/path";
   import type { OrientationVal } from "../types/app";
 
-  export let frequency: number;
+  // export let frequency: number;
 
   const size = 400;
   const center = size / 2;
@@ -69,7 +70,7 @@
   }
 
   $: pathData = createPoints(
-    frequency,
+    $frequency,
     $amplitude,
     $orientation,
     $flow,

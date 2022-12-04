@@ -9,7 +9,7 @@
   import Toasts from "./lib/components/Toasts.svelte";
 
   let svgContainer: HTMLElement;
-  let frequency = 8;
+  // let frequency = 8;
 </script>
 
 <main
@@ -19,11 +19,11 @@
     bind:this={svgContainer}
     class="flex flex-col justify-center items-center grow p-8"
   >
-    <Squiggle {frequency} />
+    <Squiggle />
   </section>
 
   <section class="landscape:flex landscape:items-center">
-    <ControlPanel bind:frequency {svgContainer} />
+    <ControlPanel {svgContainer} />
   </section>
 </main>
 
