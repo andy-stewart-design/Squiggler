@@ -40,6 +40,7 @@
         class="p-1 transition-colors ease-out hover:text-brand"
         class:random-button-active={!isRandom}
         disabled={!isRandom}
+        aria-label="Refresh Random Values"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +58,6 @@
   <div class="border-t border-black/10 dark:border-gray-100/10" />
   <div class="flex flex-col gap-1">
     <BaseRangeSlider bind:value={$frequency} {...freqProps} />
-    <input type="range" bind:value={$frequency} {...freqProps} />
     <BaseRangeSlider bind:value={$amplitude} {...ampProps} />
     <BaseRangeSlider bind:value={$strokeWeight} {...strokeProps} />
     <BaseRangeSlider bind:value={$flow} {...flowProps} />
