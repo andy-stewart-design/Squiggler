@@ -24,6 +24,7 @@
           {#if option.text}
             <span class="px-1">{option.text}</span>
           {:else if option.component}
+            <span class="sr-only">{value}</span>
             <svelte:component this={option.component} />
           {/if}
         </span>
@@ -35,5 +36,16 @@
 <style>
   .checked {
     @apply bg-brand text-white;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 </style>

@@ -1,7 +1,7 @@
 <script lang="ts">
+  // TODO global reset
   // TODO button components
   // TODO focus styles
-  // TODO global reset
   // TODO Nav
 
   import ControlPanel from "./lib/components/ControlPanel.svelte";
