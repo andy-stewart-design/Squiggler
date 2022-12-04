@@ -57,6 +57,7 @@
   <div class="flex flex-col gap-1">
     <BaseRangeSlider bind:value={frequency} {...freqProps} />
     <BaseRangeSlider bind:value={$amplitude} {...ampProps} />
+    <input type="range" bind:value={$amplitude} {...ampProps} />
     <BaseRangeSlider bind:value={$strokeWeight} {...strokeProps} />
     <BaseRangeSlider bind:value={$flow} {...flowProps} />
   </div>
