@@ -38,8 +38,8 @@
         on:click|preventDefault={() =>
           random.set(getRandom(freqProps.max * 2 - 2, 0.2))}
         class="p-1 transition-colors ease-out hover:text-brand"
-        class:random-button-active={!isRandom}
-        disabled={!isRandom}
+        class:random-button-active={!$isRandom}
+        disabled={!$isRandom}
         aria-label="Refresh Random Values"
       >
         <svg
