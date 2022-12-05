@@ -16,19 +16,18 @@
       let:checked
       class="bg-gray-200 dark:bg-gray-700 border border-black/10 dark:border-gray-100/10 hover:bg-brand/30 first-of-type:rounded-l-full last-of-type:rounded-r-full last-of-type:border-l-0 overflow-hidden focus-visible:z-10"
     >
-      <RadioGroupLabel inner class="grid">
-        <span
-          class="flex justify-center items-center text-center w-12 h-9 transition-colors ease-out"
-          class:checked
-        >
-          {#if option.text}
-            <span class="px-1">{option.text}</span>
-          {:else if option.component}
-            <span class="sr-only">{value}</span>
-            <svelte:component this={option.component} />
-          {/if}
-        </span>
-      </RadioGroupLabel>
+      <span
+        class="flex justify-center items-center text-center w-12 h-9 transition-colors ease-out"
+        class:checked
+        class:px-1={option.text}
+      >
+        {#if option.text}
+          {option.text}
+        {:else if option.component}
+          <RadioGroupLabel inner>{value}</RadioGroupLabel>
+          <svelte:component this={option.component} />
+        {/if}
+      </span>
     </RadioGroupOption>
   {/each}
 </RadioGroup>
@@ -36,16 +35,5 @@
 <style>
   .checked {
     @apply bg-brand text-white;
-  }
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
   }
 </style>
