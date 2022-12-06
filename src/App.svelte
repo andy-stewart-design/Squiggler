@@ -3,7 +3,7 @@
   // TODO button components
   // TODO focus styles
   // TODO Nav
-  import "neutral-ui/base.css";
+
   import ControlPanel from "./lib/components/ControlPanel.svelte";
   import Squiggle from "./lib/components/Squiggle.svelte";
   import Toasts from "./lib/components/Toasts.svelte";

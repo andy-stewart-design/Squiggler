@@ -4,7 +4,7 @@ import type { Value } from "neutral-ui/radio-group/types";
 export type OrientationVal = "default" | "flipped";
 export type StrokeCapVal = "round" | "butt" | "square" | "inherit";
 
-export interface RadioOption {
+export interface RadioGroupOption {
   val: Value;
   text?: string | undefined;
   component?: typeof SvelteComponent;

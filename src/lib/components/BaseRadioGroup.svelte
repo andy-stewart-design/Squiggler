@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { RadioGroup, RadioGroupLabel, RadioGroupOption } from "neutral-ui";
+  import { RadioGroup, RadioLabel, RadioOption } from "neutral-ui";
   import type { Value } from "neutral-ui/radio-group/types";
-  import type { RadioOption } from "../types/app";
+  import type { RadioGroupOption } from "../types/app";
 
   export let value: Value;
   export let label: string;
-  export let options: RadioOption[];
+  export let options: RadioGroupOption[];
 </script>
 
 <RadioGroup bind:value class="flex items-center">
-  <RadioGroupLabel class="grow" visible>{label}</RadioGroupLabel>
+  <RadioLabel class="grow" visible>{label}</RadioLabel>
   {#each options as option}
-    <RadioGroupOption
+    <RadioOption
       value={option.val}
       let:checked
       class="bg-gray-200 dark:bg-gray-700 border border-black/10 dark:border-gray-100/10 hover:bg-brand/30 first-of-type:rounded-l-full last-of-type:rounded-r-full last-of-type:border-l-0 overflow-hidden focus-visible:z-10"
@@ -24,11 +24,11 @@
         {#if option.text}
           {option.text}
         {:else if option.component}
-          <RadioGroupLabel inner>{value}</RadioGroupLabel>
+          <RadioLabel inner>{value}</RadioLabel>
           <svelte:component this={option.component} />
         {/if}
       </span>
-    </RadioGroupOption>
+    </RadioOption>
   {/each}
 </RadioGroup>
 

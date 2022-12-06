@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "neutral-ui";
   import BaseRadioGroup from "../components/BaseRadioGroup.svelte";
   import BaseRangeSlider from "../components/BaseRangeSlider.svelte";
   import BaseSwitch from "../components/BaseSwitch.svelte";
@@ -56,18 +57,16 @@
   </div>
   <div class="border-t border-black/10 dark:border-gray-100/10" />
   <div class="flex gap-3">
-    <button
-      on:click|preventDefault={() => copySVG(svgContainer)}
+    <Button
+      on:click={() => copySVG(svgContainer)}
       class="grow text-center bg-gray-50 dark:bg-gray-600 hover:bg-brand hover:text-white rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
+      >Copy SVG</Button
     >
-      Copy SVG
-    </button>
-    <button
-      on:click|preventDefault={() => downloadSVG(svgContainer)}
+    <Button
+      on:click={() => downloadSVG(svgContainer)}
       class="grow text-center bg-gray-50 dark:bg-gray-600 hover:bg-brand hover:text-white rounded-full border border-gray-800/10 dark:border-gray-100/10 p-3 transition-colors ease-out"
+      >Download</Button
     >
-      Download
-    </button>
   </div>
 </div>
 
