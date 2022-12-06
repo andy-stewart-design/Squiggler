@@ -36,7 +36,7 @@
     <BaseRadioGroup bind:value={$strokeCap} {...capProps} />
     <div class="flex gap-2">
       <BaseSwitch bind:value={$isRandom} />
-      <button
+      <!-- <button
         on:click|preventDefault={() =>
           random.set(getRandom(freqProps.max * 2 - 2, 0.2))}
         class="p-1 transition-colors ease-out hover:text-brand"
@@ -45,7 +45,15 @@
         aria-label="Refresh Random Values"
       >
         <Refresh class="w-5 h-5" />
-      </button>
+      </button> -->
+      <Button
+        on:click={() => random.set(getRandom(freqProps.max * 2 - 2, 0.2))}
+        class="random-button"
+        disabled={!$isRandom}
+        label="Refresh Random Values"
+      >
+        <Refresh class="w-5 h-5" slot="start" />
+      </Button>
     </div>
   </div>
   <div class="border-t border-black/10 dark:border-gray-100/10" />
@@ -70,8 +78,14 @@
   </div>
 </div>
 
-<style>
-  .random-button-active {
+<style global>
+  .random-button {
+    @apply p-1 transition-colors ease-out hover:text-brand;
+  }
+  /* .random-button.active {
+    @apply opacity-25 hover:text-current;
+  } */
+  .random-button:disabled {
     @apply opacity-25 hover:text-current;
   }
 </style>
