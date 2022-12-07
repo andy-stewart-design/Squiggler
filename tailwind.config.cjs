@@ -2,6 +2,7 @@
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
+const plugin = require("tailwindcss/plugin");
 
 const config = {
   content: ["./src/**/*.{html,js,svelte,ts}"],
@@ -34,7 +35,14 @@ const config = {
     },
   },
 
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant("g-dark", ":global(.dark) &");
+      addVariant("blog", ".content &");
+      addVariant("can-hover", "@media (hover: hover) {body &:hover}");
+      addVariant("active", ".active&");
+    }),
+  ],
 };
 
 module.exports = config;
